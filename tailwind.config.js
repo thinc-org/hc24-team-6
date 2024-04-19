@@ -8,6 +8,9 @@ module.exports = {
         "gradient-middle": "#FF5864",
         "gradient-end": "#FF655B",
       },
+      linearGradientColors: {
+        'custom-gradient': ['#FD297B', '#FF5864', '#FF655B'],
+      },
     },
   },
   plugins: [],

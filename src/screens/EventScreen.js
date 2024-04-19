@@ -31,10 +31,10 @@ export default function EventScreen() {
             </View>
           </View>
           <View className="h-[90px] w-[90px] ml-auto bg-slate-200 rounded-2xl items-center">
+          {/* #TODO: Implement gradient colors */}
             <Text className="text-gradient-start font-bold text-[20px] text-center mt-4">
               FREE
             </Text>
-            {/* #TODO: Implement gradient colors */}
             <Text className="mt-auto mb-2 text-center text-slate-800 font-medium">
               69 Seats Available
             </Text>

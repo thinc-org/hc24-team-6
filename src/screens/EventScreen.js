@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, SafeAreaView } from "react-native";
-import CalendarLogo from "../assets/bx_calendar.svg";
-import LocationLogo from "../assets/location.svg";
+import CalendarLogo from "../../assets/bx_calendar.svg";
+import LocationLogo from "../../assets/location.svg";
 
 export default function EventScreen() {
   return (
@@ -11,7 +11,7 @@ export default function EventScreen() {
           <Image
             className="w-full h-full rounded-3xl"
             resizeMethod="resize"
-            source={require("../assets/event.jpeg")}
+            source={require("../../assets/event.jpeg")}
           />
         </View>
         <View className="bg-white p-3 w-full rounded-xl shadow-md flex flex-row">

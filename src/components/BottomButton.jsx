@@ -5,17 +5,13 @@ import HeartButton from './HeartButton';
 
 const BottomButtons = () => {
   const handleRegisterPress = () => {
-    // pop up register success
-  };
-
-  const handleHeartPress = () => {
 
   };
 
   return (
     <View style={styles.container}>
       <RegisterButton onPress={handleRegisterPress} />
-      <HeartButton onPress={handleHeartPress} />
+      <HeartButton/>
     </View>
   );
 };

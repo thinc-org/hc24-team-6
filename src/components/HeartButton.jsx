@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TouchableOpacity, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-const HeartButton = ({ onPress }) => {
+const HeartButton = () => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const handleHeartPress = async () => {

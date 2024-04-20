@@ -28,7 +28,7 @@
     "expo-device": "~5.9.4",
     "expo-constants": "~15.4.6",
     "expo-dev-client": "~3.3.11",
-    "@types/react": "~18.2.45"
+    "@types/react": "~18.2.45",
     "tailwind-react-native-classnames": "^1.5.1",
     "tailwind-rn": "^4.2.0",
     "expo-linear-gradient": "~12.7.2"

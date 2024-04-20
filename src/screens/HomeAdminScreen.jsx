@@ -1,33 +1,30 @@
 import { View, Text, Button, ScrollView, Image } from "react-native";
-import React from "react";
 import Icon from "react-native-vector-icons/Ionicons";
+import React, { useEffect, useState } from "react";
 import EventCard from "../components/EventCard";
 import { LinearGradient } from "expo-linear-gradient";
+import { getMyEvents, getMyEventCount, getMyEventJoinPeople } from "../api/admin.api";
 
 export default function HomeAdminScreen({ navigation }) {
-  const eventData = [
-    {
-      id: 1,
-      date: "15 Feb 2020",
-      name: "Chula Engineering Fair",
-      location: "ตึก 100 ปี วิศวะ",
-      imageSource: require("../../assets/event.jpeg"),
-    },
-    {
-      id: 2,
-      date: "20 Mar 2020",
-      name: "Science Exhibition",
-      location: "ห้องประชุมสุรศักดิ์",
-      imageSource: require("../../assets/event.jpeg"),
-    },
-    {
-      id: 3,
-      date: "10 Apr 2020",
-      name: "Art Festival",
-      location: "สนามกีฬา",
-      imageSource: require("../../assets/event.jpeg"),
-    },
-  ];
+  const [eventData, setEventData] = useState([]);
+  const [eventCount, setEventCount] = useState(0);
+  const [joinedPeople, setJoinedPeople] = useState(0);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+
+    const events = await getMyEvents(token);
+    setEventData(events);
+
+    const countData = await getMyEventCount(token);
+    setEventCount(countData.count);
+
+    const joinedPeopleData = await getMyEventJoinPeople(token);
+    setJoinedPeople(joinedPeopleData.total);
+  };
 
   return (
     <View className="flex flex-col w-screen h-screen bg-background">
@@ -67,7 +64,7 @@ export default function HomeAdminScreen({ navigation }) {
             <View className="bg-white shadow w-36 h-24 rounded-xl p-4">
               <View className="flex flex-row">
                 <Image source={require("../../assets/boost.png")} />
-                <Text className="ml-4 text-3xl font-bold">125</Text>
+                <Text className="ml-4 text-3xl font-bold">{eventCount}</Text>
               </View>
               <Text className="mt-3 text-gray-500 text-center">
                 Event Created
@@ -76,7 +73,7 @@ export default function HomeAdminScreen({ navigation }) {
             <View className="bg-white shadow w-52 h-24 rounded-xl p-4">
               <View className="flex flex-row">
                 <Image source={require("../../assets/people.png")} />
-                <Text className="ml-4 text-3xl font-bold">12500</Text>
+                <Text className="ml-4 text-3xl font-bold">{joinedPeople}</Text>
               </View>
               <Text className="mt-3 text-gray-500 text-center">
                 People Joined Your Event
@@ -102,7 +99,7 @@ export default function HomeAdminScreen({ navigation }) {
               date={event.date}
               name={event.name}
               location={event.location}
-              imageSource={event.imageSource}
+              image_url={event.image_url}
             />
           ))}
         </ScrollView>

@@ -36,17 +36,17 @@ export default function EventScreen() {
           </View>
           <View className="bg-white p-3 w-full rounded-2xl shadow-md flex flex-row">
             <View className="flex flex-col flex-wrap mt-4">
-              <Text className="font-bold text-[16px]">
+              <Text className="font-bold text-xl">
                 {eventDetails.title}
               </Text>
               <View className="w-full mt-auto flex flex-row items-center">
                 <CalendarLogo />
-                <Text className="text-slate-600 text-[10px] ml-2">
+                <Text className="text-slate-600 text-md ml-2">
                   {formattedDate}
                 </Text>
                 <View className="ml-5 flex flex-row items-center">
                   <LocationLogo />
-                  <Text className="text-slate-00 text-[10px] ml-2">
+                  <Text className="text-slate-00 text-md ml-2">
                     {eventDetails.location}
                   </Text>
                 </View>
@@ -77,11 +77,11 @@ export default function EventScreen() {
             </View>
           </View>
           <View className="bg-white p-6 w-full rounded-2xl shadow-md flex space-y-2">
-            <Text className="font-semibold text-[16px]">About Event</Text>
-            <Text className="text-slate-600 text-[12px]">
+            <Text className="font-semibold text-xl">About Event</Text>
+            <Text className="text-slate-600 text-sm">
               {eventDetails.description}
             </Text>
-            <Text className="font-semibold text-[16px]">Location</Text>
+            <Text className="font-semibold text-xl">Location</Text>
             <View className="w-full aspect-square">
               <MapGoogle
                 latitude={eventDetails.latitude}

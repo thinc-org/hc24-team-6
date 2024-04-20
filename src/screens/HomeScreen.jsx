@@ -1,9 +1,10 @@
-import { View, Text, Button, ScrollView } from "react-native";
+import { View, Text, Button, ScrollView, Pressable } from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import EventCard from "../components/EventCard";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from '@react-navigation/native'
+import {  MagnifyingGlassIcon} from "react-native-heroicons/mini";
 
 export default function HomeScreen() {
   const navigation = useNavigation()
@@ -19,6 +20,7 @@ export default function HomeScreen() {
       size: 100,
       price: 0,
       imageSource: require("../../assets/event.jpeg"),
+      description: "งานเปิดภาควิชาวิศวกรรมศาสตร์ ประจำปี 2563",
     },
     {
       id: 2,
@@ -28,6 +30,7 @@ export default function HomeScreen() {
       size: 200,
       price: 100,
       imageSource: require("../../assets/event.jpeg"),
+      description: "งานแสดงผลงานวิจัยและนวัตกรรมภาควิทยาศาสตร์",
     },
     {
       id: 3,
@@ -37,6 +40,7 @@ export default function HomeScreen() {
       size: 0,
       price: 0,
       imageSource: require("../../assets/event.jpeg"),
+      description: "งานเทศกาลศิลปะ ประจำปี 2563",
     },
   ];
 
@@ -63,12 +67,13 @@ export default function HomeScreen() {
               <Icon name="notifications-outline" size={24} color="black" />
             </View>
           </View>
-          <View className="mx-4 h-10 bg-white rounded-3xl">
-            <Button
-              title="Search Event"
-              onPress={()=> navigateToEvent()}
-            />
-          </View>
+          <Pressable onPress={()=> navigateToEvent()}>
+            <View className="mx-4 h-10 bg-white rounded-3xl flex-row items-center pl-4">
+              <Icon name="search" size={24} color="red" className="ml-2" />
+              <Text className="text-[#ADADAD] font-bold text-base ml-2">See All Event</Text>
+            </View>
+          </Pressable>
+          
         </LinearGradient>
 
         <View className="flex flex-row justify-between">

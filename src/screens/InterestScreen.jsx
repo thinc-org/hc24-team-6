@@ -1,8 +1,10 @@
 import { View, Text, ScrollView, Button } from "react-native";
 import React from "react";
 import InterestCard from "../components/InterestCard";
+import { useNavigation } from "@react-navigation/native";
 
 const InterestScreen = () => {
+  const navigation = useNavigation();
   const mockData = [
     { iconName: "heart-outline", text: "Interest 1" },
     { iconName: "star-outline", text: "Interest 2" },

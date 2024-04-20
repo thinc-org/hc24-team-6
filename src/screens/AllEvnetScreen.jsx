@@ -8,7 +8,7 @@ import { mockCategoryData } from '../../assets/mockdata/data';
 import { mockEventData } from '../../assets/mockdata/data';
 import CategoryFIlter from '../components/CategoryFIlter';
 
-export default function EventScreen() {
+export default function AllEventScreen() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("");
   const [category, setCategory] = useState("");
@@ -18,10 +18,10 @@ export default function EventScreen() {
     mockEventData.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const filterData = searchData.filter((searchData) =>{
-    return searchData.category === "Hackathon"
-  }
-  );
+//   const filterData = searchData.filter((searchData) =>{
+//     return searchData.category === "Hackathon"
+//   }
+//   );
 
   const isOpened = filter ? "block" : "hidden";
     return (
@@ -57,7 +57,7 @@ export default function EventScreen() {
             <Text className="text-[#ADADAD] text-base font-semibold mt-2">Category</Text>
             <View className="flex-row gap-2 flex-wrap mt-1">
             {
-              mockCategoryData.map((category) => {
+              searchData.map((category) => {
                 const bgColorStyle = category.isUsing ? "bg-[#FF5B61] " : "bg-[#F5F5F5]"
                 const textColorStyle = category.isUsing ? "text-white" : "text-[#000000]"
                 return (

@@ -1,23 +1,28 @@
-import React from 'react';
-import { useState } from 'react';
-import { View, Text, TextInput, Button, TouchableOpacity} from 'react-native';
-import { RadioButton } from 'react-native-paper';
-import tw from 'tailwind-react-native-classnames'; // Import tailwind-react-native-classnames or similar library
+import React from "react";
+import { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  TouchableOpacity,
+  Image,
+} from "react-native";
+import { RadioButton } from "react-native-paper";
+import tw from "tailwind-react-native-classnames";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function SignIn() {
   const handleSignIn = () => {
-    // Handle sign-in logic here
-    alert('Signing in...');
+    alert("Signing in...");
   };
 
   const handleSignInWithChula = () => {
-    // Handle sign-in with Chula account
-    alert('Signing in with Chula account...');
+    alert("Signing in with Chula account...");
   };
 
   const handleSignInWithGoogle = () => {
-    // Handle sign-in with Google account
-    alert('Signing in with Google account...');
+    alert("Signing in with Google account...");
   };
 
   const [checked, setChecked] = useState(false);
@@ -26,63 +31,77 @@ export default function SignIn() {
     setChecked(!checked);
   };
 
-
   return (
-    <View style={tw`flex-1 justify-center items-center p-4`}>
-    <Text style={[tw`text-3xl font-bold mb-4`, { color: '#000000' }]}>Sign In</Text>
+    <View style={tw`flex-1 justify-center items-center p-4 bg-white`}>
+      <Text style={[tw`text-4xl font-bold mb-4`, { color: "#000000" }]}>
+        Sign In
+      </Text>
+      <Text className="text-gray-500 mb-10">Please sign-in to continue</Text>
 
-    <View style={tw`mb-4`}>
-      <Text style={tw`text-gray-700 mb-2`}>Username</Text>
-      <TextInput
-        style={tw`h-10 w-64 border border-gray-400 px-4 rounded-xl`}
-        placeholder="Enter your username"
-        autoCapitalize="none"
-      />
-    </View>
-    
-    <View style={tw`mb-4`}>
-      <Text style={tw`text-gray-700 mb-2`}>Password</Text>
-      <TextInput
-        style={tw`h-10 w-64 border border-gray-400 px-4 rounded-xl`}
-        placeholder="Enter your password"
-        secureTextEntry={true}
-      />
-    </View>
+      <View>
+        <View style={tw`mb-4`}>
+          <Text style={tw`text-gray-700 mb-2 font-semibold`}>Username</Text>
+          <TextInput
+            className="h-10 w-72 border border-gray-400 px-4 rounded-xl"
+            placeholder="Enter your username"
+            autoCapitalize="none"
+          />
+        </View>
 
-    <View style={[tw``,{ flexDirection: 'row', alignItems: 'center' }]}>
-      <RadioButton.Android
-        color="#FD2978"
-        value="remember"
-        status={checked ? 'checked' : 'unchecked'}
-        onPress={handleCheck}
-        size={5}
-      />
-      <Text style={{ marginLeft: 1, fontSize: 12 }}>Remember me</Text>
-    </View>
+        <View style={tw`mb-4`}>
+          <Text style={tw`text-gray-700 mb-2 font-semibold`}>Password</Text>
+          <TextInput
+            style={tw`h-10 w-72 border border-gray-400 px-4 rounded-xl`}
+            placeholder="Enter your password"
+            secureTextEntry={true}
+          />
+        </View>
 
-    <TouchableOpacity
-      style={[tw`h-10 w-64 rounded-xl items-center justify-center mt-4`, { backgroundColor: '#FD2978' }]}
-      onPress={handleSignIn}
-    >
-      <Text style={tw`text-white font-bold`}>Sign In</Text>
-    </TouchableOpacity>
+        <View className="flex flex-row items-center justify-start">
+          <RadioButton.Android
+            color="#FD2978"
+            value="remember"
+            status={checked ? "checked" : "unchecked"}
+            onPress={handleCheck}
+            size={5}
+          />
+          <Text style={{ marginLeft: 1, fontSize: 12 }}>Remember me</Text>
+        </View>
+      </View>
 
-    <Text style={tw`mt-4`}>Or sign in with:</Text>
-
-    <View style={tw`mt-4`}>
-      <TouchableOpacity
-        style={[tw`h-10 w-64 rounded-xl items-center justify-center`, { backgroundColor: '#FFFFFF' }]}
-        onPress={handleSignInWithChula}
+      <LinearGradient
+        colors={["#FD297B", "#FF5864", "#FF655B"]}
+        start={{ x: 0, y: 0 }}
+        locations={[0, 0.6, 1]}
+        end={{ x: 1, y: 0 }}
+        className="h-10 w-72 rounded-3xl items-center justify-center mt-4"
       >
-        <Text>Chula Account</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={tw`bg-red-500 rounded px-4 py-2 mt-2 items-center`}
-        onPress={handleSignInWithGoogle}
-      >
-        <Text style={tw`text-white`}>Google Account</Text>
-      </TouchableOpacity>
+        <Text style={tw`text-white font-bold`}>Sign In</Text>
+      </LinearGradient>
+
+      <View className="flex flex-row items-center">
+        <Text className="mt-4 text-gray-400">ALREADY HAVE AN ACCOUNT?</Text>
+        <Text className="mt-4 text-red"> SIGN UP</Text>
+      </View>
+
+      <View className="mt-8 flex flex-row justify-between items-center">
+        <View className="bg-gray-500 h-[0.5px] w-full"></View>
+        <Text className="text-gray-500 p-4">Or</Text>
+        <View className="bg-gray-500 h-[0.5px] w-full"></View>
+      </View>
+
+      <View className="mt-3">
+        <View className="px-3 h-10 w-72 rounded-3xl flex justify-center items-center text-white bg-white border border-gray-300 flex-row">
+          <Image source={require("../../assets/chula.png")} />
+          <Text className="pl-2 text-gray-500">Sign Up with Chula Account</Text>
+        </View>
+        <View className="px-3 h-10 w-72 rounded-3xl flex justify-center mt-5 items-center text-white bg-white border border-gray-300 flex-row">
+          <Image source={require("../../assets/google.png")} />
+          <Text className="pl-2 text-gray-500">
+            Sign Up with Google Account
+          </Text>
+        </View>
+      </View>
     </View>
-  </View>
   );
 }

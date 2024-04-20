@@ -2,6 +2,8 @@ import React from "react";
 import { View, Text, Image, SafeAreaView } from "react-native";
 import CalendarLogo from "../../assets/bx_calendar.svg";
 import LocationLogo from "../../assets/location.svg";
+import { LinearGradient } from "expo-linear-gradient";
+import MaskedView from "@react-native-masked-view/masked-view";
 
 export default function EventScreen() {
   return (
@@ -31,10 +33,24 @@ export default function EventScreen() {
             </View>
           </View>
           <View className="h-[90px] w-[90px] ml-auto bg-slate-200 rounded-2xl items-center">
-          {/* #TODO: Implement gradient colors */}
-            <Text className="text-gradient-start font-bold text-[20px] text-center mt-4">
-              FREE
-            </Text>
+            <MaskedView
+              maskElement={
+                <Text className="font-bold text-[20px] mt-4 text-center">
+                  FREE
+                </Text>
+              }
+            >
+              <LinearGradient
+                colors={["#FD297B", "#FF5864", "#FF655B"]}
+                start={{ x: 0, y: 0 }}
+                locations={[0, 0.5, 1]}
+                end={{ x: 1, y: 0 }}
+              >
+                <Text className="font-bold text-[20px] mt-4 text-center opacity-0">
+                  FREE
+                </Text>
+              </LinearGradient>
+            </MaskedView>
             <Text className="mt-auto mb-2 text-center text-slate-800 font-medium">
               69 Seats Available
             </Text>

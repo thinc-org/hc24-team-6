@@ -4,7 +4,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import EventCard from "../components/EventCard";
 import { LinearGradient } from "expo-linear-gradient";
 
-export default function HomeAdminScreen() {
+export default function HomeAdminScreen({ navigation }) {
   const eventData = [
     {
       id: 1,

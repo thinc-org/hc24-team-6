@@ -4,7 +4,20 @@
     "slug": "CunextEvent",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "notification": {
+      "icon": "./assets/CuEvent.png",
+      "color": "#ffffff"
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#ffffff"
+        }
+      ]
+    ],
+    "icon": "./assets/CuEvent.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",

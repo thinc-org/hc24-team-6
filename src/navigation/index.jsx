@@ -6,6 +6,9 @@ import EventScreen from '../screens/EventScreen';
 import AllEventScreen from '../screens/AllEvnetScreen';
 import SignIn from '../screens/Login';
 import Register from '../screens/Register';
+import AdminHome from '../screens/HomeAdminScreen';
+import Detail from '../screens/CreateEvent';
+
 
 const stack = createNativeStackNavigator();
 
@@ -18,6 +21,8 @@ function AppNavigation() {
         <stack.Screen name="AllEvent" component={AllEventScreen} />
         <stack.Screen name="SignIn" component={SignIn} />
         <stack.Screen name="Register" component={Register} />
+        <stack.Screen name="AdminHome" component={AdminHome} />
+        <stack.Screen name="Detail" component={Detail} />
       </stack.Navigator>
     </NavigationContainer>
   );

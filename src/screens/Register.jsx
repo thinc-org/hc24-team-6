@@ -11,7 +11,6 @@ import {
 import { RadioButton } from "react-native-paper";
 import tw from "tailwind-react-native-classnames";
 import { LinearGradient } from "expo-linear-gradient";
-import axios from 'axios';
 import { useNavigation } from "@react-navigation/native";
 
 export default function Register() {
@@ -24,7 +23,7 @@ export default function Register() {
 
   const handleRegister = async() => {
     try{
-      const response = await fetch('https://softwareengineering-backend.vercel.app/api/auth/register', {
+      const response = await fetch('https://cunext-event-backend.onrender.com/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -34,8 +33,7 @@ export default function Register() {
           password: password,
         })
       });
-      console.log(response);
-      if(response.status == 200){
+      if(response.status == 201){
         navigation.navigate("Interest");
       }
     } catch (error) {

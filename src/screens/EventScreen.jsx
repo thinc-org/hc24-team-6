@@ -25,15 +25,15 @@ export default function EventScreen(props) {
         </View>
         <View className="bg-white p-3 w-full rounded-xl shadow-md flex flex-row">
           <View className="flex flex-col flex-wrap mt-4">
-            <Text className="font-bold text-[16px]">{event.name}</Text>
+            <Text className="font-bold text-xl">{event.name}</Text>
             <View className="w-full mt-auto flex flex-row items-center">
               <CalendarLogo />
-              <Text className="text-slate-600 text-[10px] ml-2">
+              <Text className="text-slate-600 text-[14px] ml-2">
                 {event.date}
               </Text>
               <View className="ml-5 flex flex-row items-center">
                 <LocationLogo />
-                <Text className="text-slate-00 text-[10px] ml-2">
+                <Text className="text-slate-600 text-[14px] ml-2">
                   {event.location}
                 </Text>
               </View>
@@ -41,7 +41,7 @@ export default function EventScreen(props) {
           </View>
           <View className="h-[90px] w-[90px] ml-auto bg-slate-200 rounded-2xl items-center">
           {/* #TODO: Implement gradient colors */}
-            <Text className="text-gradient-start font-bold text-[20px] text-center mt-4">
+            <Text className="text-gradient-start font-bold text-[26px] text-center mt-4">
               {event.price === 0 ? "FREE" : `$${event.price}`}
             </Text>
             <Text className="mt-auto mb-2 text-center text-slate-800 font-medium">

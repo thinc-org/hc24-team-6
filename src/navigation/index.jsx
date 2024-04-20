@@ -8,6 +8,7 @@ import SignIn from '../screens/Login';
 import Register from '../screens/Register';
 import AdminHome from '../screens/HomeAdminScreen';
 import Detail from '../screens/CreateEvent';
+import InterestScreen from '../screens/InterestScreen';
 
 
 const stack = createNativeStackNavigator();
@@ -15,7 +16,7 @@ const stack = createNativeStackNavigator();
 function AppNavigation() {
   return (
     <NavigationContainer>
-      <stack.Navigator initialRouteName='Home' screenOptions={{headerShown: false}}>
+      <stack.Navigator initialRouteName='SignIn' screenOptions={{headerShown: false}}>
         <stack.Screen name="Home" component={HomeScreen} />
         <stack.Screen name="Event" component={EventScreen} />
         <stack.Screen name="AllEvent" component={AllEventScreen} />
@@ -23,6 +24,7 @@ function AppNavigation() {
         <stack.Screen name="Register" component={Register} />
         <stack.Screen name="AdminHome" component={AdminHome} />
         <stack.Screen name="Detail" component={Detail} />
+        <stack.Screen name="Interest" component={InterestScreen} />
       </stack.Navigator>
     </NavigationContainer>
   );

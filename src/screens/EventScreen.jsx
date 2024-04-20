@@ -1,19 +1,22 @@
 import React from "react";
-import { View, Text, Image, SafeAreaView } from "react-native";
+import { View, Text, Image, SafeAreaView, ScrollView } from "react-native";
 import CalendarLogo from "../../assets/bx_calendar.svg";
 import LocationLogo from "../../assets/location.svg";
 import { ArrowLeftCircleIcon } from "react-native-heroicons/outline";
-
+import MapGoogle from "../components/MapGoogle";
+import BottomButton from "../components/BottomButton";
 export default function EventScreen(props) {
   let event = props.route.params;
   if(event.data) event = event.data;
   return (
     <SafeAreaView className=" w-screen h-screen bg-background">
+      <ScrollView>
       <View className="flex-1 items-center space-y-[5%] w-full h-full px-[2%]">
         <View className="w-full aspect-square">
           <View className="absolute z-10 ml-5 mt-5">
             <ArrowLeftCircleIcon
               color="white"
+              size = {35}
               onPress={() => props.navigation.goBack()}
             />
           </View>
@@ -50,13 +53,23 @@ export default function EventScreen(props) {
           </View>
         </View>
         <View className="bg-white p-3 w-full rounded-xl shadow-md flex  space-y-2">
-          <Text className="font-semibold text-[16px]">About Event</Text>
-          <Text className="text-slate-600 text-[12px]">
+          <Text className="font-semibold text-xl">About Event</Text>
+          <Text className="text-slate-600 text-sm">
             {event.description}
           </Text>
-          <Text className="font-semibold text-[16px]">Location</Text>
+          <Text className="font-semibold text-xl">Location</Text>
+          <View className="w-full aspect-square">
+              <MapGoogle
+                latitude={event.latitude}
+                longitude={event.longitude}
+                title={event.location}
+              />
+            </View>
         </View>
+        <View style={{ marginBottom: 50 }}></View>
       </View>
+      </ScrollView>
+      <BottomButton/>
     </SafeAreaView>
   );
 }

@@ -8,14 +8,19 @@ import MapGoogle from "../components/MapGoogle";
 
 export default function EventScreen() {
   const eventDetails = {
-    name: "งานกินเลี้ยงจิบน้ำชา",
-    date: "17 May 2023",
+    title: "งานกินเลี้ยงจิบน้ำชา",
+    start_date: "2024-07-01T00:00:00Z",
     location: "บ้านนายเอก",
     description:
-      "งานกินเลี้ยงจิบน้ำชา จัดขึ้นเพื่อเป็นการเชิญเพื่อนๆมาเลี้ยงจิบน้ำชา และเพื่อเป็นการเปิดเทอม 2 ของเราโดยจะมีการจัดกิจกรรมต่างๆให้เพื่อนๆได้ร่วมสนุกและมีของรางวัลให้กับผู้ที่ชนะในการแข่งขัน ห้ามพลาดนะครับ",
+    "งานกินเลี้ยงจิบน้ำชา จัดขึ้นเพื่อเป็นการเชิญเพื่อนๆมาเลี้ยงจิบน้ำชา และเพื่อเป็นการเปิดเทอม 2 ของเราโดยจะมีการจัดกิจกรรมต่างๆให้เพื่อนๆได้ร่วมสนุกและมีของรางวัลให้กับผู้ที่ชนะในการแข่งขัน ห้ามพลาดนะครับ",
+    price: 0,
+    seat_available: 100,
     latitude: 13.736549,
     longitude: 100.53393,
+    image_url: "https://source.unsplash.com/1600x900/?event",
   };
+  const date = new Date(eventDetails.start_date);
+  const formattedDate = date.toISOString().split("T")[0];
 
   return (
     <SafeAreaView className=" w-screen h-screen bg-background">
@@ -25,18 +30,18 @@ export default function EventScreen() {
             <Image
               className="w-full h-full rounded-3xl"
               resizeMethod="resize"
-              source={require("../../assets/event.jpeg")}
+              source={{ uri: eventDetails.image_url }}
             />
           </View>
           <View className="bg-white p-3 w-full rounded-2xl shadow-md flex flex-row">
             <View className="flex flex-col flex-wrap mt-4">
               <Text className="font-bold text-[16px]">
-                {eventDetails.name}
+                {eventDetails.title}
               </Text>
               <View className="w-full mt-auto flex flex-row items-center">
                 <CalendarLogo />
                 <Text className="text-slate-600 text-[10px] ml-2">
-                  {eventDetails.date}
+                  {formattedDate}
                 </Text>
                 <View className="ml-5 flex flex-row items-center">
                   <LocationLogo />
@@ -50,7 +55,7 @@ export default function EventScreen() {
               <MaskedView
                 maskElement={
                   <Text className="font-bold text-[20px] mt-4 text-center">
-                    FREE
+                    {eventDetails.price === 0 ? "FREE" : eventDetails.price}
                   </Text>
                 }
               >
@@ -65,8 +70,8 @@ export default function EventScreen() {
                   </Text>
                 </LinearGradient>
               </MaskedView>
-              <Text className="mt-auto mb-2 text-center text-slate-800 font-medium">
-                69 Seats Available
+              <Text className="mt-auto mb-2 text-center text-slate-800 font-medium text-[12px]">
+                {eventDetails.seat_available} Seats Available
               </Text>
             </View>
           </View>

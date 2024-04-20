@@ -8,9 +8,13 @@ import MapGoogle from "../components/MapGoogle";
 
 export default function EventScreen() {
   const eventDetails = {
+    name: "งานกินเลี้ยงจิบน้ำชา",
+    date: "17 May 2023",
+    location: "บ้านนายเอก",
+    description:
+      "งานกินเลี้ยงจิบน้ำชา จัดขึ้นเพื่อเป็นการเชิญเพื่อนๆมาเลี้ยงจิบน้ำชา และเพื่อเป็นการเปิดเทอม 2 ของเราโดยจะมีการจัดกิจกรรมต่างๆให้เพื่อนๆได้ร่วมสนุกและมีของรางวัลให้กับผู้ที่ชนะในการแข่งขัน ห้ามพลาดนะครับ",
     latitude: 13.736549,
     longitude: 100.53393,
-    title: "ตึก 100 ปี",
   };
 
   return (
@@ -27,17 +31,17 @@ export default function EventScreen() {
           <View className="bg-white p-3 w-full rounded-2xl shadow-md flex flex-row">
             <View className="flex flex-col flex-wrap mt-4">
               <Text className="font-bold text-[16px]">
-                งานกินเลี้ยงจิบน้ำชา
+                {eventDetails.name}
               </Text>
               <View className="w-full mt-auto flex flex-row items-center">
                 <CalendarLogo />
                 <Text className="text-slate-600 text-[10px] ml-2">
-                  17 May 2023
+                  {eventDetails.date}
                 </Text>
                 <View className="ml-5 flex flex-row items-center">
                   <LocationLogo />
                   <Text className="text-slate-00 text-[10px] ml-2">
-                    บ้านนายเอก
+                    {eventDetails.location}
                   </Text>
                 </View>
               </View>
@@ -69,18 +73,14 @@ export default function EventScreen() {
           <View className="bg-white p-6 w-full rounded-2xl shadow-md flex space-y-2">
             <Text className="font-semibold text-[16px]">About Event</Text>
             <Text className="text-slate-600 text-[12px]">
-              งานกินเลี้ยงจิบน้ำชา
-              จัดขึ้นเพื่อเป็นการเชิญเพื่อนๆมาเลี้ยงจิบน้ำชา
-              และเพื่อเป็นการเปิดเทอม 2 ของเรา
-              โดยจะมีการจัดกิจกรรมต่างๆให้เพื่อนๆได้ร่วมสนุก
-              และมีของรางวัลให้กับผู้ที่ชนะในการแข่งขัน ห้ามพลาดนะครับ
+              {eventDetails.description}
             </Text>
             <Text className="font-semibold text-[16px]">Location</Text>
             <View className="w-full aspect-square">
               <MapGoogle
                 latitude={eventDetails.latitude}
                 longitude={eventDetails.longitude}
-                title={eventDetails.title}
+                title={eventDetails.location}
               />
             </View>
           </View>

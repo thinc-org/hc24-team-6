@@ -15,7 +15,7 @@ const stack = createNativeStackNavigator();
 function AppNavigation() {
   return (
     <NavigationContainer>
-      <stack.Navigator initialRouteName='AllEvent' screenOptions={{headerShown: false}}>
+      <stack.Navigator initialRouteName='Home' screenOptions={{headerShown: false}}>
         <stack.Screen name="Home" component={HomeScreen} />
         <stack.Screen name="Event" component={EventScreen} />
         <stack.Screen name="AllEvent" component={AllEventScreen} />

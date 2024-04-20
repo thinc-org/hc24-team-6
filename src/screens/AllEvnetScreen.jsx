@@ -1,4 +1,4 @@
-import { View, Text, Image, TextInput,ScrollView, Button } from 'react-native'
+import { View, Text, Image, TextInput,ScrollView, Button, Pressable } from 'react-native'
 import { MapPinIcon } from "react-native-heroicons/micro";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { FunnelIcon,MagnifyingGlassIcon,XMarkIcon } from "react-native-heroicons/mini";
@@ -7,6 +7,8 @@ import Checkbox from 'expo-checkbox';
 import { mockCategoryData } from '../../assets/mockdata/data';
 import { mockEventData } from '../../assets/mockdata/data';
 import CategoryFIlter from '../components/CategoryFIlter';
+import { useNavigation } from '@react-navigation/native'
+import { ArrowLeftCircleIcon } from "react-native-heroicons/outline";
 
 export default function AllEventScreen() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,6 +17,8 @@ export default function AllEventScreen() {
   const [dateFilter, setDateFilter] = useState(null);
   const [sizeFilter, setSizeFilter] = useState('');
   const [priceFilter, setPriceFilter] = useState('');
+
+  const navigation = useNavigation()
 
   const initialpriceState = {
     free : false,
@@ -39,7 +43,6 @@ export default function AllEventScreen() {
        if(categoryFilter && event.category !== categoryFilter){
            return false;
        }
-       console.log(categoryFilter)
 
        if (dateFilter && event.date !== dateFilter.toISOString().split('T')[0]) {
         return false;
@@ -71,26 +74,34 @@ export default function AllEventScreen() {
 
   const isOpened = filter ? "block" : "hidden";
     return (
-        <View className="pt-16 flex-col items-center">
-                <View className="flex-row w-[385px] h-[50px] bg-white rounded-3xl border-2 border-slate-300">
-                    <View className="flex-row items-center p-4">
-                        <MagnifyingGlassIcon color="#ADADAD"/>
-                        <TextInput
-                            placeholder="Search"
-                            value={searchTerm}
-                            onChangeText={(e) => setSearchTerm(e)}
-                            className="w-[240px] h-[50px] rounded-3xl p-2"
-                        />
-                    </View>
+        <View className="pt-16 flex-col">            
+            <View className="absolute z-10 mt-10 ml-7">
+                <ArrowLeftCircleIcon
+                    color="#000"
+                    onPress={() => navigation.goBack()}
+                />
+            </View >         
+                <View className="items-center mt-2">
+                    <View className="flex-row w-[385px] h-[50px] bg-white rounded-3xl border-2 border-slate-300">
+                        <View className="flex-row items-center p-4">
+                            <MagnifyingGlassIcon color="#ADADAD"/>
+                            <TextInput
+                                placeholder="Search"
+                                value={searchTerm}
+                                onChangeText={(e) => setSearchTerm(e)}
+                                className="w-[240px] h-[50px] rounded-3xl p-2"
+                            />
+                        </View>
 
-                    <View className="flex-row items-center mr-4 w-5 h-full">
-                        <FunnelIcon color="#FF5B61" onPress={() => setFilter(!filter)}/>
-                    </View>
+                        <View className="flex-row items-center mr-4 w-5 h-full">
+                            <FunnelIcon color="#FF5B61" onPress={() => setFilter(!filter)}/>
+                        </View>
 
-                    <View className="w-[2px] h-[48px] border-r-2 border-slate-300"></View>
+                        <View className="w-[2px] h-[48px] border-r-2 border-slate-300"></View>
 
-                    <View className="flex-row items-center justify-center ml-3">
-                        <XMarkIcon color="#ADADAD" onPress={() => setSearchTerm()}/>
+                        <View className="flex-row items-center justify-center ml-3">
+                            <XMarkIcon color="#ADADAD" onPress={() => setSearchTerm()}/>
+                        </View>
                     </View>
                 </View>
 
@@ -159,35 +170,41 @@ export default function AllEventScreen() {
                         </View>
                 </View> : null
             }
-         
-            <ScrollView
-                vertical
-                showsVerticalScrollIndicator={false}
-                showsHorizontalScrollIndicator={false}
-                className="flex-col gap-10 mt-1 w-[425px]"
-                contentContainerStyle={{paddingBottom: 100}}
-            >
-                {
-                filterData.map((event) => {
-                    return (
-                        <View className="w-[370px] h-[90px] bg-white flex items-center rounded-2xl flex-row">
-                            <Image source={require('../../assets/running_event.jpg')}
-                            style={{width: 70, height: 100, borderRadius: 10, marginLeft: 16, marginBottom: 36,}}
-                            />
-                            <View className="flex-col justify-center gap-1 mx-5">
-                                <Text className="text-[#FF5B61] text-md font-bold">{event.date}</Text>
-                                <Text className="text-lg font-bold">{event.name}</Text>
-                                <View className="flex-row">
-                                        <MapPinIcon className="w-4 h-4" color="#ADADAD" />
-                                    <Text className="text-[#ADADAD] font-extrabold">{event.location}</Text>
+
+            <View className="items-center">
+                <ScrollView
+                    vertical
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                    className="flex-col gap-10 mt-1 w-[425px]"
+                    contentContainerStyle={{paddingBottom: 100}}
+                >
+                    {
+                    filterData.map((event,index) => {
+                        return (
+                            <Pressable
+                                onPress={() => navigation.navigate('Event', {...event})}
+                                key={index}
+                            >
+                            <View className="w-[370px] h-[90px] bg-white flex items-center rounded-2xl flex-row" >
+                                <Image source={require('../../assets/event.jpeg')}
+                                style={{width: 70, height: 100, borderRadius: 10, marginLeft: 16, marginBottom: 36,}}
+                                />
+                                <View className="flex-col justify-center gap-1 mx-5">
+                                    <Text className="text-[#FF5B61] text-md font-bold">{event.date}</Text>
+                                    <Text className="text-lg font-bold">{event.name}</Text>
+                                    <View className="flex-row">
+                                            <MapPinIcon className="w-4 h-4" color="#ADADAD" />
+                                        <Text className="text-[#ADADAD] font-extrabold">{event.location}</Text>
+                                    </View>
                                 </View>
-                            </View>
-                        </View>
-                    )
-                })
-            }
-            </ScrollView>
-            
+                            </View>  
+                            </Pressable>
+                        )
+                    })
+                }
+                </ScrollView>
+            </View>
         </View>
     );
     }

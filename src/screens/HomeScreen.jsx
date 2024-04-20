@@ -3,14 +3,21 @@ import React from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import EventCard from "../components/EventCard";
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from '@react-navigation/native'
 
 export default function HomeScreen() {
+  const navigation = useNavigation()
+  const navigateToEvent = () => {
+    navigation.navigate("AllEvent");
+  }
   const eventData = [
     {
       id: 1,
       date: "15 Feb 2020",
       name: "Chula Engineering Fair",
       location: "ตึก 100 ปี วิศวะ",
+      size: 100,
+      price: 0,
       imageSource: require("../../assets/event.jpeg"),
     },
     {
@@ -18,6 +25,8 @@ export default function HomeScreen() {
       date: "20 Mar 2020",
       name: "Science Exhibition",
       location: "ห้องประชุมสุรศักดิ์",
+      size: 200,
+      price: 100,
       imageSource: require("../../assets/event.jpeg"),
     },
     {
@@ -25,6 +34,8 @@ export default function HomeScreen() {
       date: "10 Apr 2020",
       name: "Art Festival",
       location: "สนามกีฬา",
+      size: 0,
+      price: 0,
       imageSource: require("../../assets/event.jpeg"),
     },
   ];
@@ -54,8 +65,8 @@ export default function HomeScreen() {
           </View>
           <View className="mx-4 h-10 bg-white rounded-3xl">
             <Button
-              title="Search"
-              onPress={() => navigation.navigate("Event")}
+              title="Search Event"
+              onPress={()=> navigateToEvent()}
             />
           </View>
         </LinearGradient>
@@ -64,7 +75,7 @@ export default function HomeScreen() {
           <Text className="font-bold text-xl mx-4 mt-6">
             Recommended For You
           </Text>
-          <Text className="text-lg items-center mx-4 mt-6 text-red">
+          <Text className="text-lg items-center mx-4 mt-6 text-red" onPress={()=> navigateToEvent()}>
             See All
           </Text>
         </View>
@@ -73,13 +84,10 @@ export default function HomeScreen() {
           horizontal
           showsHorizontalScrollIndicator={false}
         >
-          {eventData.map((event) => (
+          {eventData.map((event,index) => (
             <EventCard
-              key={event.id}
-              date={event.date}
-              name={event.name}
-              location={event.location}
-              imageSource={event.imageSource}
+              props={event}
+              key={index}
             />
           ))}
         </ScrollView>

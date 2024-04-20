@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "288880443985",
+    "project_id": "expopushnotification-bab6e",
+    "storage_bucket": "expopushnotification-bab6e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288880443985:android:a5109a6a244e74a8a5ae70",
+        "android_client_info": {
+          "package_name": "com.pongsakon.CunextEvent"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMLgj_vJDM3mL1bTWNsbYmnXRqmi28A4w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

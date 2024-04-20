@@ -2,7 +2,7 @@ import { View, Text, Button, ScrollView } from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import EventCard from "../components/EventCard";
-// import Card from "../components/Card";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function HomeScreen() {
   const eventData = [
@@ -32,7 +32,13 @@ export default function HomeScreen() {
   return (
     <View className="flex flex-col w-screen h-screen bg-background">
       <ScrollView className="">
-        <View className="bg-red h-72 w-full rounded-3xl flex-col justify-between pb-4">
+        <LinearGradient
+          colors={["#FD297B", "#FF5864", "#FF655B"]}
+          start={{ x: 0, y: 0 }}
+          locations={[0, 0.6, 1]}
+          end={{ x: 1, y: 0 }}
+          className="h-72 w-full rounded-3xl flex-col justify-between pb-4"
+        >
           <View className="flex flex-row justify-between">
             <View className="mt-16">
               <Text className="text-5xl text-white font-bold pl-5">
@@ -52,7 +58,7 @@ export default function HomeScreen() {
               onPress={() => navigation.navigate("Event")}
             />
           </View>
-        </View>
+        </LinearGradient>
 
         <View className="flex flex-row justify-between">
           <Text className="font-bold text-xl mx-4 mt-6">
@@ -81,7 +87,7 @@ export default function HomeScreen() {
           <Text className="font-bold text-xl mx-4 mt-6 mb-6">New Event</Text>
         </View>
         <View className="mx-4 mb-8">
-        {/* {eventData.map((event) => (
+          {/* {eventData.map((event) => (
             <Card
               key={event.id}
               date={event.date}

@@ -14,7 +14,7 @@ import { LinearGradient } from "expo-linear-gradient";
 
 export default function Register({ navigation }) {
   const handleSignInClick = () => {
-    navigation.navigate("SignIn"); 
+    navigation.navigate("SignIn");
   };
 
   const handleRegister = () => {
@@ -69,7 +69,9 @@ export default function Register({ navigation }) {
         end={{ x: 1, y: 0 }}
         className="h-10 w-72 rounded-3xl items-center justify-center mt-4"
       >
-        <Text style={tw`text-white font-bold`}>Register</Text>
+        <TouchableOpacity onPress={handleSignInClick}>
+          <Text style={tw`text-white font-bold`}>Register</Text>
+        </TouchableOpacity>
       </LinearGradient>
 
       <View className="flex flex-row items-center">

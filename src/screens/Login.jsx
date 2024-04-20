@@ -17,7 +17,6 @@ export default function SignIn({ navigation }) {
     navigation.navigate("Register"); 
   };
 
-
   const handleSignIn = () => {
     alert("Signing in...");
   };

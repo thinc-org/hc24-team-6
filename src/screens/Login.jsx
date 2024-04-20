@@ -12,7 +12,12 @@ import { RadioButton } from "react-native-paper";
 import tw from "tailwind-react-native-classnames";
 import { LinearGradient } from "expo-linear-gradient";
 
-export default function SignIn() {
+export default function SignIn({ navigation }) {
+  const handleSignInClick = () => {
+    navigation.navigate("Register"); 
+  };
+
+
   const handleSignIn = () => {
     alert("Signing in...");
   };
@@ -81,7 +86,9 @@ export default function SignIn() {
 
       <View className="flex flex-row items-center">
         <Text className="mt-4 text-gray-400">ALREADY HAVE AN ACCOUNT?</Text>
-        <Text className="mt-4 text-red"> SIGN UP</Text>
+        <TouchableOpacity onPress={handleSignInClick}>
+          <Text className="mt-4 text-red">SIGN UP</Text>
+        </TouchableOpacity>
       </View>
 
       <View className="mt-8 flex flex-row justify-between items-center">

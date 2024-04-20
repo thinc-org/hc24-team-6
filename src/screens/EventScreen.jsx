@@ -5,6 +5,7 @@ import LocationLogo from "../../assets/location.svg";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
 import MapGoogle from "../components/MapGoogle";
+import BottomButtons from "../components/BottomButton";
 
 export default function EventScreen() {
   const eventDetails = {
@@ -91,6 +92,7 @@ export default function EventScreen() {
           </View>
         </View>
       </ScrollView>
+      <BottomButtons/>
     </SafeAreaView>
   );
 }

@@ -11,7 +11,6 @@ import {
 import { RadioButton } from "react-native-paper";
 import tw from "tailwind-react-native-classnames";
 import { LinearGradient } from "expo-linear-gradient";
-import { Axios } from "react-native-axios";
 import { useNavigation } from "@react-navigation/native";
 
 export default function SignIn() {
@@ -24,7 +23,7 @@ export default function SignIn() {
 
   const handleSignIn = async() => {
     try{
-      const response = await fetch('https://softwareengineering-backend.vercel.app/api/auth/login', {
+      const response = await fetch('https://cunext-event-backend.onrender.com/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -34,8 +33,6 @@ export default function SignIn() {
           password: password
         })
       });
-      const setCookieHeader = response.headers.map['set-cookie'];
-      const token = setCookieHeader.split(';')[0].split('=')[1];
       if(response.status == 200){
         navigation.navigate("Home");
       }

@@ -5,6 +5,7 @@ import EventCard from "../components/EventCard";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from '@react-navigation/native'
 import {  MagnifyingGlassIcon} from "react-native-heroicons/mini";
+import { schedulePushNotification } from "../hooks/schedulePushNotification";
 
 export default function HomeScreen() {
   const navigation = useNavigation()

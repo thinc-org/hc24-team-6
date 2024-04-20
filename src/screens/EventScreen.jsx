@@ -1,144 +1,56 @@
-import { View, Text, Image, TextInput,ScrollView, Button } from 'react-native'
-import { MapPinIcon } from "react-native-heroicons/micro";
-import DateTimePicker from '@react-native-community/datetimepicker';
-import { FunnelIcon,MagnifyingGlassIcon,XMarkIcon } from "react-native-heroicons/mini";
-import {React,useState} from 'react'
-import Checkbox from 'expo-checkbox';
-import { mockCategoryData } from '../../assets/mockdata/data';
-import { mockEventData } from '../../assets/mockdata/data';
-import CategoryFIlter from '../components/CategoryFIlter';
+import React from "react";
+import { View, Text, Image, SafeAreaView } from "react-native";
+import CalendarLogo from "../../assets/bx_calendar.svg";
+import LocationLogo from "../../assets/location.svg";
 
 export default function EventScreen() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filter, setFilter] = useState("");
-  const [category, setCategory] = useState("");
-  const [isChecked, setChecked] = useState(false);
-
-  const searchData = mockEventData.filter((mockEventData) =>
-    mockEventData.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  const filterData = searchData.filter((searchData) =>{
-    return searchData.category === "Hackathon"
-  }
-  );
-
-  const isOpened = filter ? "block" : "hidden";
-    return (
-      <View className="pt-16 flex-col items-center">
-          <View className="flex-row w-[385px] h-[50px] bg-white rounded-3xl border-2 border-slate-300">
-            <View className="flex-row items-center p-4">
-              <MagnifyingGlassIcon color="#ADADAD"/>
-              <TextInput
-                placeholder="Search"
-                value={searchTerm}
-                onChangeText={(e) => setSearchTerm(e)}
-                className="w-[240px] h-[50px] rounded-3xl p-2"
-              />
-            </View>
-
-            <View className="flex-row items-center mr-4">
-              <FunnelIcon color="#FF5B61" onPress={() => setFilter(!filter)}/>
-            </View>
-
-            <View className="w-[2px] h-[48px] border-r-2 border-slate-300"></View>
-
-            <View className="flex-row items-center justify-center ml-3">
-              <XMarkIcon color="#ADADAD" onPress={() => setSearchTerm()}/>
+  return (
+    <SafeAreaView className=" w-screen h-screen bg-background">
+      <View className="flex-1 items-center space-y-[5%] w-full h-full px-[2%]">
+        <View className="w-full aspect-square">
+          <Image
+            className="w-full h-full rounded-3xl"
+            resizeMethod="resize"
+            source={require("../../assets/event.jpeg")}
+          />
+        </View>
+        <View className="bg-white p-3 w-full rounded-xl shadow-md flex flex-row">
+          <View className="flex flex-col flex-wrap mt-4">
+            <Text className="font-bold text-[16px]">งานกินเลี้ยงจิบน้ำชา</Text>
+            <View className="w-full mt-auto flex flex-row items-center">
+              <CalendarLogo />
+              <Text className="text-slate-600 text-[10px] ml-2">
+                17 May 2023
+              </Text>
+              <View className="ml-5 flex flex-row items-center">
+                <LocationLogo />
+                <Text className="text-slate-00 text-[10px] ml-2">
+                  บ้านนายเอก
+                </Text>
+              </View>
             </View>
           </View>
-
-        <View className={`absolute w-[250px] h-[650px] bg-white shadow-xl z-10 mt-32 right-7 rounded-xl p-5 ${isOpened}`}>
-          <View className="border-b-2 border-gray-200 pb-2">
-            <Text className="text-lg font-bold">
-                Refine Results
+          <View className="h-[90px] w-[90px] ml-auto bg-slate-200 rounded-2xl items-center">
+          {/* #TODO: Implement gradient colors */}
+            <Text className="text-gradient-start font-bold text-[20px] text-center mt-4">
+              FREE
             </Text>
-          </View>            
-            <Text className="text-[#ADADAD] text-base font-semibold mt-2">Category</Text>
-            <View className="flex-row gap-2 flex-wrap mt-1">
-            {
-              mockCategoryData.map((category) => {
-                const bgColorStyle = category.isUsing ? "bg-[#FF5B61] " : "bg-[#F5F5F5]"
-                const textColorStyle = category.isUsing ? "text-white" : "text-[#000000]"
-                return (
-                  <View className={`w-auto h-[30px] ${bgColorStyle} rounded-full p-2`}>
-                    <Text className={`${textColorStyle}`}>
-                      {category.name}
-                    </Text>
-                  </View>
-                )
-              })
-            }
-            </View>
-
-            <Text className="text-[#ADADAD] text-base font-semibold mt-5">Date and Time</Text>
-            <DateTimePicker value={new Date()}/>
-
-            <Text className="text-[#ADADAD] text-base font-semibold mt-5">Event Size</Text>
-            <View className="flex-col gap-y-1">
-              <View className="flex-row gap-2">
-                <Checkbox value={isChecked} onValueChange={setChecked}/>
-                <Text className="text-sm font-semibold">Small ( 1 - 50 people )</Text>
-              </View>
-
-              <View className="flex-row gap-2">
-                <Checkbox value={isChecked} onValueChange={setChecked}/>
-                <Text className="text-sm font-semibold">Medium ( 51 - 200 people )</Text>
-              </View>
-
-              <View className="flex-row gap-2">
-                <Checkbox value={isChecked} onValueChange={setChecked}/>
-                <Text className="text-sm font-semibold">Large ( 200+ people )</Text>
-              </View>
-            </View>
-
-            <Text className="text-[#ADADAD] text-base font-semibold mt-5">Price</Text>
-            <View className="flex-col gap-y-1">
-              <View className="flex-row gap-2">
-                <Checkbox value={isChecked} onValueChange={setChecked}/>
-                <Text className="text-sm font-semibold">Free</Text>
-              </View>
-
-              <View className="flex-row gap-2">
-                <Checkbox value={isChecked} onValueChange={setChecked}/>
-                <Text className="text-sm font-semibold">Paid - Affordable</Text>
-              </View>
-
-              <View className="flex-row gap-2">
-                <Checkbox value={isChecked} onValueChange={setChecked}/>
-                <Text className="text-sm font-semibold">Paid - Premium</Text>
-              </View>
-            </View>
+            <Text className="mt-auto mb-2 text-center text-slate-800 font-medium">
+              69 Seats Available
+            </Text>
+          </View>
         </View>
-       
-        <ScrollView
-          vertical
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          className="flex-col gap-10 mt-1 w-[425px]"
-          contentContainerStyle={{paddingBottom: 100}}
-        >
-          {
-          filterData.map((event) => {
-            return (
-              <View className="w-[370px] h-[90px] bg-white flex items-center rounded-2xl flex-row">
-                <Image source={require('../../assets/running_event.jpg')}
-                style={{width: 70, height: 100, borderRadius: 10, marginLeft: 16, marginBottom: 36,}}
-                />
-                <View className="flex-col justify-center gap-1 mx-5">
-                  <Text className="text-[#FF5B61] text-md font-bold">{event.date}</Text>
-                  <Text className="text-lg font-bold">{event.name}</Text>
-                  <View className="flex-row">
-                      <MapPinIcon className="w-4 h-4" color="#ADADAD" />
-                    <Text className="text-[#ADADAD] font-extrabold">{event.location}</Text>
-                  </View>
-                </View>
-              </View>
-            )
-          })
-        }
-        </ScrollView>
-        
+        <View className="bg-white p-3 w-full rounded-xl shadow-md flex  space-y-2">
+          <Text className="font-semibold text-[16px]">About Event</Text>
+          <Text className="text-slate-600 text-[12px]">
+            งานกินเลี้ยงจิบน้ำชา จัดขึ้นเพื่อเป็นการเชิญเพื่อนๆมาเลี้ยงจิบน้ำชา
+            และเพื่อเป็นการเปิดเทอม 2 ของเรา
+            โดยจะมีการจัดกิจกรรมต่างๆให้เพื่อนๆได้ร่วมสนุก
+            และมีของรางวัลให้กับผู้ที่ชนะในการแข่งขัน ห้ามพลาดนะครับ
+          </Text>
+          <Text className="font-semibold text-[16px]">Location</Text>
+        </View>
       </View>
-    );
-    }
+    </SafeAreaView>
+  );
+}

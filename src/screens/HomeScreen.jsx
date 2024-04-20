@@ -65,8 +65,8 @@ export default function HomeScreen() {
           </View>
           <View className="mx-4 h-10 bg-white rounded-3xl">
             <Button
-              title="Search"
-              onPress={() => navigation.navigate("Event")}
+              title="Search Event"
+              onPress={()=> navigateToEvent()}
             />
           </View>
         </LinearGradient>

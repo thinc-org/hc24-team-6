@@ -1,55 +1,34 @@
 import { View, Text, Image, TextInput,ScrollView, Button } from 'react-native'
 import { MapPinIcon } from "react-native-heroicons/micro";
-import { FunnelIcon,MagnifyingGlassIcon } from "react-native-heroicons/mini";
+import DateTimePicker from '@react-native-community/datetimepicker';
+import { FunnelIcon,MagnifyingGlassIcon,XMarkIcon } from "react-native-heroicons/mini";
 import {React,useState} from 'react'
+import Checkbox from 'expo-checkbox';
+import { mockCategoryData } from '../../assets/mockdata/data';
+import { mockEventData } from '../../assets/mockdata/data';
+import CategoryFIlter from '../components/CategoryFIlter';
 
 export default function EventScreen() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("");
   const [category, setCategory] = useState("");
-  const mockData = [
-    {
-      date: "16 Feb 2020",
-      name: "CHULA CANCER RUN",
-      location: "สนามกึฬาจุฬาลงกรณ์มหาวิทยาลัย",
-      category: "Running",
-      size: 20,
-      price: 0,
-    },
-    {
-      date: "20 Nov 2020",
-      name: "Event 2",
-      location: "หอใน",
-      category: "Hackathon",
-      size: 40,
-      price: 0,
-    },
-    {
-      date: "24 Oct 2020",
-      name: "Event 3",
-      location: "ตึก 1 ชั้น 2",
-      category: "Party",
-      size: 10,
-      price: 0,
-    },
-    {
-      date: "10 Feb 2020",
-      name: "Event 4",
-      location: "หอใน",
-      category: "Concert",
-      size: 150,
-      price: 200,
-    }
-  ];
-  const filterData = mockData.filter((mockData) =>
-    mockData.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const [isChecked, setChecked] = useState(false);
+
+  const searchData = mockEventData.filter((mockEventData) =>
+    mockEventData.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const filterData = searchData.filter((searchData) =>{
+    return searchData.category === "Hackathon"
+  }
+  );
+
   const isOpened = filter ? "block" : "hidden";
     return (
       <View className="pt-16 flex-col items-center">
           <View className="flex-row w-[385px] h-[50px] bg-white rounded-3xl border-2 border-slate-300">
             <View className="flex-row items-center p-4">
-              <MagnifyingGlassIcon color="#807979"/>
+              <MagnifyingGlassIcon color="#ADADAD"/>
               <TextInput
                 placeholder="Search"
                 value={searchTerm}
@@ -62,7 +41,11 @@ export default function EventScreen() {
               <FunnelIcon color="#FF5B61" onPress={() => setFilter(!filter)}/>
             </View>
 
-            <View className="w-[2px] h-[50px] border-r-2 border-slate-300"></View>
+            <View className="w-[2px] h-[48px] border-r-2 border-slate-300"></View>
+
+            <View className="flex-row items-center justify-center ml-3">
+              <XMarkIcon color="#ADADAD" onPress={() => setSearchTerm()}/>
+            </View>
           </View>
 
         <View className={`absolute w-[250px] h-[650px] bg-white shadow-xl z-10 mt-32 right-7 rounded-xl p-5 ${isOpened}`}>
@@ -70,12 +53,63 @@ export default function EventScreen() {
             <Text className="text-lg font-bold">
                 Refine Results
             </Text>
-          </View>
-        </View>
-          
-        <Text>
+          </View>            
+            <Text className="text-[#ADADAD] text-base font-semibold mt-2">Category</Text>
+            <View className="flex-row gap-2 flex-wrap mt-1">
+            {
+              mockCategoryData.map((category) => {
+                const bgColorStyle = category.isUsing ? "bg-[#FF5B61] " : "bg-[#F5F5F5]"
+                const textColorStyle = category.isUsing ? "text-white" : "text-[#000000]"
+                return (
+                  <View className={`w-auto h-[30px] ${bgColorStyle} rounded-full p-2`}>
+                    <Text className={`${textColorStyle}`}>
+                      {category.name}
+                    </Text>
+                  </View>
+                )
+              })
+            }
+            </View>
 
-        </Text>
+            <Text className="text-[#ADADAD] text-base font-semibold mt-5">Date and Time</Text>
+            <DateTimePicker value={new Date()}/>
+
+            <Text className="text-[#ADADAD] text-base font-semibold mt-5">Event Size</Text>
+            <View className="flex-col gap-y-1">
+              <View className="flex-row gap-2">
+                <Checkbox value={isChecked} onValueChange={setChecked}/>
+                <Text className="text-sm font-semibold">Small ( 1 - 50 people )</Text>
+              </View>
+
+              <View className="flex-row gap-2">
+                <Checkbox value={isChecked} onValueChange={setChecked}/>
+                <Text className="text-sm font-semibold">Medium ( 51 - 200 people )</Text>
+              </View>
+
+              <View className="flex-row gap-2">
+                <Checkbox value={isChecked} onValueChange={setChecked}/>
+                <Text className="text-sm font-semibold">Large ( 200+ people )</Text>
+              </View>
+            </View>
+
+            <Text className="text-[#ADADAD] text-base font-semibold mt-5">Price</Text>
+            <View className="flex-col gap-y-1">
+              <View className="flex-row gap-2">
+                <Checkbox value={isChecked} onValueChange={setChecked}/>
+                <Text className="text-sm font-semibold">Free</Text>
+              </View>
+
+              <View className="flex-row gap-2">
+                <Checkbox value={isChecked} onValueChange={setChecked}/>
+                <Text className="text-sm font-semibold">Paid - Affordable</Text>
+              </View>
+
+              <View className="flex-row gap-2">
+                <Checkbox value={isChecked} onValueChange={setChecked}/>
+                <Text className="text-sm font-semibold">Paid - Premium</Text>
+              </View>
+            </View>
+        </View>
        
         <ScrollView
           vertical

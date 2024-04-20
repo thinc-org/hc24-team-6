@@ -14,7 +14,6 @@
     "@react-navigation/native-stack": "^6.9.26",
     "expo": "~50.0.14",
     "expo-checkbox": "~2.7.0",
-    "expo-linear-gradient": "^12.7.2",
     "expo-status-bar": "~1.11.1",
     "nativewind": "^2.0.11",
     "react": "18.2.0",
@@ -25,11 +24,10 @@
     "react-native-screens": "~3.29.0",
     "expo-linear-gradient": "~12.7.2",
     "@react-native-masked-view/masked-view": "0.3.0",
-    "react-native-maps": "1.10.0"
+    "react-native-maps": "1.10.0",
     "react-native-svg": "^14.1.0",
     "tailwind-react-native-classnames": "^1.5.1",
-    "tailwind-rn": "^4.2.0",
-    "expo-linear-gradient": "~12.7.2"
+    "tailwind-rn": "^4.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

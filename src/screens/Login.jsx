@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import { useContext } from "react";
+import AuthContext from "../provider/AuthProvider";
 import {
   View,
   Text,
@@ -20,6 +22,7 @@ export default function SignIn() {
   const handleSignInClick = () => {
     navigation.navigate("Register"); 
   };
+  const { setToken } = useContext(AuthContext);
 
   const handleSignIn = async() => {
     try{
@@ -36,6 +39,9 @@ export default function SignIn() {
       if(response.status == 200){
         navigation.navigate("Home");
       }
+      const token = await response.json();
+      setToken(token);
+      console.log(token);
     } catch (error) {
       console.log(error);
     }

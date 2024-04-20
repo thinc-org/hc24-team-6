@@ -1,13 +1,16 @@
 import { View, Text, Button, ScrollView, Pressable } from "react-native";
-import React from "react";
+import React ,{ useContext } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import EventCard from "../components/EventCard";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from '@react-navigation/native'
 import {  MagnifyingGlassIcon} from "react-native-heroicons/mini";
 import { schedulePushNotification } from "../hooks/schedulePushNotification";
+import AuthContext from "../provider/AuthProvider";
 
 export default function HomeScreen() {
+  const { Token } = useContext(AuthContext);
+  console.log(Token);
   const navigation = useNavigation()
   const navigateToEvent = () => {
     navigation.navigate("AllEvent");

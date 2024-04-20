@@ -6,6 +6,8 @@ export const mockEventData = [
       category: "Running",
       size: 20,
       price: 0,
+      description: "งานวิ่งเพื่อเก็บเงินเพื่อการวิจัยโรคมะเร็ง",
+      imageSource: require("../../assets/event.jpeg"),
     },
     {
       date: "20 Nov 2020",
@@ -14,6 +16,8 @@ export const mockEventData = [
       category: "Hackathon",
       size: 40,
       price: 0,
+      description: "งานแข่งขันสร้างโปรแกรมภายใน 24 ชั่วโมง",
+      imageSource: '../../assets/running_event.jpeg',
     },
     {
       date: "24 Oct 2020",
@@ -22,6 +26,8 @@ export const mockEventData = [
       category: "Party",
       size: 10,
       price: 0,
+      description: "งานเลี้ยงวันเกิดให้กับเพื่อนๆ",
+      imageSource: '../../assets/running_event.jpeg',
     },
     {
       date: "10 Feb 2020",
@@ -30,6 +36,8 @@ export const mockEventData = [
       category: "Concert",
       size: 150,
       price: 200,
+      description: "งานคอนเสิร์ตเพื่อเปิดเทอม 2",
+      imageSource: '../../assets/running_event.jpeg',
     }
   ];
 

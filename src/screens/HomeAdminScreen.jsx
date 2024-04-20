@@ -1,10 +1,10 @@
-import { View, Text, Button, ScrollView } from "react-native";
+import { View, Text, Button, ScrollView, Image } from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import EventCard from "../components/EventCard";
 import { LinearGradient } from "expo-linear-gradient";
 
-export default function HomeScreen() {
+export default function HomeAdminScreen({ navigation }) {
   const eventData = [
     {
       id: 1,
@@ -41,29 +41,52 @@ export default function HomeScreen() {
         >
           <View className="flex flex-row justify-between">
             <View className="mt-16">
-              <Text className="text-5xl text-white font-bold pl-5">
-                Event at
-              </Text>
+              <Text className="text-5xl text-white font-bold pl-5">Manage</Text>
               <Text className="text-5xl text-white font-bold pl-5 pt-2">
-                Chula.
+                Your Event
               </Text>
-            </View>
-            <View className="mt-16 absolute top-0 right-0 mr-4 p-3 bg-white rounded-full shadow">
-              <Icon name="notifications-outline" size={24} color="black" />
             </View>
           </View>
-          <View className="mx-4 h-10 bg-white rounded-3xl">
-            <Button
-              title="Search"
-              onPress={() => navigation.navigate("Event")}
-            />
+          <View className="mx-4 mb-5 flex flex-row items-center">
+            <View className="w-10 h-10 items-center flex justify-center bg-white rounded-full mr-4">
+              <Button
+                title="+"
+                onPress={() => navigation.navigate("Detail")}
+                color="black"
+              />
+            </View>
+            <Text className="text-white text-2xl font-bold">
+              Add Your Event
+            </Text>
           </View>
         </LinearGradient>
 
+        <View className="mx-4 flex flex-col">
+          <Text className="font-bold text-xl mt-6">Overview</Text>
+          <View className="flex flex-row gap-3 mt-3 w-full">
+            <View className="bg-white shadow w-36 h-24 rounded-xl p-4">
+              <View className="flex flex-row">
+                <Image source={require("../../assets/boost.png")} />
+                <Text className="ml-4 text-3xl font-bold">125</Text>
+              </View>
+              <Text className="mt-3 text-gray-500 text-center">
+                Event Created
+              </Text>
+            </View>
+            <View className="bg-white shadow w-52 h-24 rounded-xl p-4">
+              <View className="flex flex-row">
+                <Image source={require("../../assets/people.png")} />
+                <Text className="ml-4 text-3xl font-bold">12500</Text>
+              </View>
+              <Text className="mt-3 text-gray-500 text-center">
+                People Joined Your Event
+              </Text>
+            </View>
+          </View>
+        </View>
+
         <View className="flex flex-row justify-between">
-          <Text className="font-bold text-xl mx-4 mt-6">
-            Recommended For You
-          </Text>
+          <Text className="font-bold text-xl mx-4 mt-6">Your Event</Text>
           <Text className="text-lg items-center mx-4 mt-6 text-red">
             See All
           </Text>
@@ -83,20 +106,6 @@ export default function HomeScreen() {
             />
           ))}
         </ScrollView>
-        <View className="flex flex-row justify-between">
-          <Text className="font-bold text-xl mx-4 mt-6 mb-6">New Event</Text>
-        </View>
-        <View className="mx-4 mb-8">
-          {/* {eventData.map((event) => (
-            <Card
-              key={event.id}
-              date={event.date}
-              name={event.name}
-              location={event.location}
-              imageSource={event.imageSource}
-            />
-          ))} */}
-        </View>
       </ScrollView>
     </View>
   );

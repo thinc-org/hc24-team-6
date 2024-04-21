@@ -44,10 +44,6 @@ export default function AllEventScreen() {
            return false;
        }
 
-       if (dateFilter && event.date !== dateFilter.toISOString().split('T')[0]) {
-        return false;
-        }
-
         if (sizeState && priceState) {
             // console.log(sizeState, priceState)
             let eventSize = parseInt(event.size);

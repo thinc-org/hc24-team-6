@@ -30,6 +30,7 @@
     "react": "18.2.0",
     "react-native": "0.73.6",
     "react-native-axios": "^0.17.1",
+    "react-native-element-dropdown": "^2.10.4",
     "react-native-heroicons": "^4.0.0",
     "react-native-image-picker": "^7.1.2",
     "react-native-maps": "^1.14.0",

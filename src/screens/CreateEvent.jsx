@@ -14,6 +14,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import MapGoogle from "../components/MapGoogle";
 import { useNavigation } from '@react-navigation/native'
 import ImagePickerCreateEvent from "../components/ImagePickerComponent";
+import DropDownCreate from "../components/DropDownCreate";
 
 export default function CreateEvent() {
   const [eventName, setEventName] = useState("");
@@ -80,12 +81,13 @@ export default function CreateEvent() {
             </View>
             <View>
               <Text className="font-semibold text-lg">Category</Text>
-              <TextInput
+              <DropDownCreate/>
+              {/* <TextInput
                 className="h-10 mt-2 w-full border border-gray-200 px-4 rounded-xl"
                 placeholder="Type your category name here"
                 value={eventCategory}
                 onChangeText={setEventCategory}
-              />
+              /> */}
             </View>
           </View>
           <View className="bg-white w-full rounded-3xl p-4 flex flex-col gap-y-3">

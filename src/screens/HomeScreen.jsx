@@ -1,12 +1,12 @@
-import { View, Text, Button, ScrollView, Pressable } from "react-native";
+import { View, Text, Button, ScrollView, Pressable, Image } from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import EventCard from "../components/EventCard";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from '@react-navigation/native'
-import {  MagnifyingGlassIcon} from "react-native-heroicons/mini";
+import { MagnifyingGlassIcon } from "react-native-heroicons/mini";
 import { schedulePushNotification } from "../hooks/schedulePushNotification";
-
+import { MapPinIcon } from "react-native-heroicons/outline";
 export default function HomeScreen() {
   const navigation = useNavigation()
   const navigateToEvent = () => {
@@ -20,8 +20,10 @@ export default function HomeScreen() {
       location: "ตึก 100 ปี วิศวะ",
       size: 100,
       price: 0,
-      imageSource: require("../../assets/event.jpeg"),
+      image_url: require("../../assets/event.jpeg"),
       description: "งานเปิดภาควิชาวิศวกรรมศาสตร์ ประจำปี 2563",
+      latitude : 13.736717,
+      longitude : 100.523186
     },
     {
       id: 2,
@@ -30,8 +32,10 @@ export default function HomeScreen() {
       location: "ห้องประชุมสุรศักดิ์",
       size: 200,
       price: 100,
-      imageSource: require("../../assets/event.jpeg"),
+      image_url: require("../../assets/event.jpeg"),
       description: "งานแสดงผลงานวิจัยและนวัตกรรมภาควิทยาศาสตร์",
+      latitude : 13.736717,
+      longitude : 100.523186
     },
     {
       id: 3,
@@ -39,9 +43,11 @@ export default function HomeScreen() {
       name: "Art Festival",
       location: "สนามกีฬา",
       size: 0,
-      price: 0,
-      imageSource: require("../../assets/event.jpeg"),
+      price: 5,
+      image_url: require("../../assets/event.jpeg"),
       description: "งานเทศกาลศิลปะ ประจำปี 2563",
+      latitude : 13.736717,
+      longitude : 100.523186
     },
   ];
 
@@ -68,20 +74,20 @@ export default function HomeScreen() {
               <Icon name="notifications-outline" size={24} color="black" />
             </View>
           </View>
-          <Pressable onPress={()=> navigateToEvent()}>
+          <Pressable onPress={() => navigateToEvent()}>
             <View className="mx-4 h-10 bg-white rounded-3xl flex-row items-center pl-4">
               <Icon name="search" size={24} color="red" className="ml-2" />
               <Text className="text-[#ADADAD] font-bold text-base ml-2">See All Event</Text>
             </View>
           </Pressable>
-          
+
         </LinearGradient>
 
         <View className="flex flex-row justify-between">
           <Text className="font-bold text-xl mx-4 mt-6">
             Recommended For You
           </Text>
-          <Text className="text-lg items-center mx-4 mt-6 text-red" onPress={()=> navigateToEvent()}>
+          <Text className="text-lg items-center mx-4 mt-6 text-red" onPress={() => navigateToEvent()}>
             See All
           </Text>
         </View>
@@ -90,7 +96,7 @@ export default function HomeScreen() {
           horizontal
           showsHorizontalScrollIndicator={false}
         >
-          {eventData.map((event,index) => (
+          {eventData.map((event, index) => (
             <EventCard
               props={event}
               key={index}
@@ -100,16 +106,26 @@ export default function HomeScreen() {
         <View className="flex flex-row justify-between">
           <Text className="font-bold text-xl mx-4 mt-6 mb-6">New Event</Text>
         </View>
-        <View className="mx-4 mb-8">
-          {/* {eventData.map((event) => (
-            <Card
-              key={event.id}
-              date={event.date}
-              name={event.name}
-              location={event.location}
-              imageSource={event.imageSource}
-            />
-          ))} */}
+        <View className="mx-4 mb-8 space-y-8">
+          {eventData.map((event) => (
+            <Pressable
+              onPress={() => navigation.navigate('Event', { ...event })}
+            >
+              <View className="w-[370px] h-[90px] bg-white flex items-center rounded-2xl flex-row" >
+                <Image source={require('../../assets/event.jpeg')}
+                  style={{ width: 70, height: 100, borderRadius: 10, marginLeft: 16, marginBottom: 36, }}
+                />
+                <View className="flex-col justify-center gap-1 mx-5">
+                  <Text className="text-[#FF5B61] text-md font-bold">{event.date}</Text>
+                  <Text className="text-lg font-bold">{event.name}</Text>
+                  <View className="flex-row">
+                    <MapPinIcon className="w-4 h-4" color="#ADADAD" />
+                    <Text className="text-[#ADADAD] font-extrabold">{event.location}</Text>
+                  </View>
+                </View>
+              </View>
+            </Pressable>
+          ))}
         </View>
       </ScrollView>
     </View>

@@ -21,24 +21,8 @@ export default function Register() {
     navigation.navigate("SignIn");
   };
 
-  const handleRegister = async() => {
-    try{
-      const response = await fetch('https://cunext-event-backend.onrender.com/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: username,
-          password: password,
-        })
-      });
-      if(response.status == 201){
-        navigation.navigate("Interest");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const handleRegister = () => {
+      navigation.navigate("Interest");
   };
 
   const handleRegisterWithChula = () => {
@@ -92,7 +76,7 @@ export default function Register() {
         className="h-10 w-72 rounded-3xl items-center justify-center mt-4"
       >
         <TouchableOpacity onPress={handleRegister}>
-          <Text style={tw`text-white font-bold`}>Register</Text>
+          <Text style={tw`text-white font-bold`} onPress={handleRegister}>Register</Text>
         </TouchableOpacity>
       </LinearGradient>
 

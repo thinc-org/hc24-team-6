@@ -78,9 +78,10 @@ export default function HomeScreen() {
           <Text className="font-bold text-xl mx-4 mt-6 mb-6">New Event</Text>
         </View>
         <View className="mx-4 mb-8 space-y-8">
-          {eventData.slice(0, 4).map((event) => (
+          {eventData.slice(0, 4).map((event,index) => (
             <Pressable
               onPress={() => navigation.navigate('Event', { ...event })}
+              key={index}
             >
               <View className="w-[370px] h-[90px] bg-white flex items-center rounded-2xl flex-row" >
                 <Image source={{ uri: event.image_url }}

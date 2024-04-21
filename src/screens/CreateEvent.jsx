@@ -11,10 +11,13 @@ import {
   Alert,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import * as ImagePicker from "expo-image-picker";
-import { Ionicons } from "@expo/vector-icons";
 import MapGoogle from "../components/MapGoogle";
 import { useNavigation } from '@react-navigation/native'
+
+import { schedulePushNotification } from "../hooks/schedulePushNotification";
+import ImagePickerCreateEvent from "../components/ImagePickerComponent";
+import DropDownCreate from "../components/DropDownCreate";
+import { usePushNotification } from "../hooks/usePushNotification";
 
 export default function CreateEvent() {
   const [eventName, setEventName] = useState("");
@@ -24,53 +27,16 @@ export default function CreateEvent() {
   const [maxAttendee, setMaxAttendee] = useState("");
   const [eventCategory, setEventCategory] = useState("");
   const [eventDescription, setEventDescription] = useState("");
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [error, setError] = useState(null);
 
   const navigation = useNavigation()
 
-  const handleImagePicker = async () => {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== "granted") {
-      Alert.alert(
-        "Permission Denied",
-        "Sorry, we need camera roll permission to select an image."
-      );
-      setError("Permission denied");
-      return;
-    }
+  const { expoPushToken, notification } = usePushNotification();
 
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [1, 1],
-      quality: 1,
-    });
-
-    if (!result.canceled) {
-      setSelectedImage(result.uri);
-      setError(null);
-    }
-  };
   return (
     <View className="w-screen h-screen bg-background">
       <ScrollView className="">
         <View className="flex-1 items-center space-y-[5%] w-full h-full px-[2%]">
-          <View className="w-full aspect-square mt-16" onPress={handleImagePicker}>
-            <TouchableOpacity onPress={handleImagePicker}>
-              {selectedImage ? (
-                <Image
-                  source={{ uri: selectedImage }}
-                  style={{ width: "100%", height: "100%", borderRadius: 12 }}
-                />
-              ) : (
-                <View className="w-full h-full rounded-3xl bg-white justify-center items-center">
-                  <Ionicons name="add-circle" size={80} color="#FF5864" />
-                </View>
-              )}
-            </TouchableOpacity>
-            {error && <Text className="text-red-500">{error}</Text>}
-          </View>
+          <ImagePickerCreateEvent/>
 
           <View className="bg-white w-full rounded-3xl p-4 flex flex-col gap-y-3">
             <View>
@@ -120,12 +86,13 @@ export default function CreateEvent() {
             </View>
             <View>
               <Text className="font-semibold text-lg">Category</Text>
-              <TextInput
+              <DropDownCreate/>
+              {/* <TextInput
                 className="h-10 mt-2 w-full border border-gray-200 px-4 rounded-xl"
                 placeholder="Type your category name here"
                 value={eventCategory}
                 onChangeText={setEventCategory}
-              />
+              /> */}
             </View>
           </View>
           <View className="bg-white w-full rounded-3xl p-4 flex flex-col gap-y-3">
@@ -161,7 +128,9 @@ export default function CreateEvent() {
           end={{ x: 1, y: 0 }}
           className="h-10 w-72 rounded-3xl items-center justify-center"
         >
-          <Text className="text-white font-bold" onPress = {() => navigation.navigate("AdminHome")}>Create Event</Text>
+          <Text className="text-white font-bold" onPress = {() => {
+            schedulePushNotification({title: "New Event Created", body:`${eventName} is created`, seconds: 1});
+            navigation.navigate("AdminHome")}}>Create Event</Text>
         </LinearGradient>
       </View>
       </View>

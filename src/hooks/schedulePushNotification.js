@@ -1,9 +1,6 @@
 import * as Notifications from 'expo-notifications';
-import { usePushNotification } from './usePushNotification';
 
 export const schedulePushNotification = async ({title, body, seconds}) => {
-    const { expoPushToken, notification } = usePushNotification();
-
     // Request permissions for notifications if not already granted
     const { status: existingStatus } = await Notifications.getPermissionsAsync();
     let finalStatus = existingStatus;

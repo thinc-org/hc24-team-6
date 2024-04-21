@@ -13,6 +13,8 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import MapGoogle from "../components/MapGoogle";
 import { useNavigation } from '@react-navigation/native'
+
+import { schedulePushNotification } from "../hooks/schedulePushNotification";
 import ImagePickerCreateEvent from "../components/ImagePickerComponent";
 import DropDownCreate from "../components/DropDownCreate";
 
@@ -123,7 +125,8 @@ export default function CreateEvent() {
           end={{ x: 1, y: 0 }}
           className="h-10 w-72 rounded-3xl items-center justify-center"
         >
-          <Text className="text-white font-bold" onPress = {() => navigation.navigate("AdminHome")}>Create Event</Text>
+          <Text className="text-white font-bold" onPress = {() => {() => {schedulePushNotification({title: "New Event Created", body:`${eventName} is created`, seconds: 1})};
+          navigation.navigate("AdminHome")}}>Create Event</Text>
         </LinearGradient>
       </View>
       </View>

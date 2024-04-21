@@ -11,7 +11,7 @@ import { Platform } from "react-native";
 //     notification?: Notifications.Notification;
 // }
 
-export function usePushNotifications() {
+export function usePushNotification() {
     
     Notifications.setNotificationHandler({
         handleNotification: async () => ({

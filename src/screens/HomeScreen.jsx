@@ -1,4 +1,4 @@
-import { View, Text, Button, ScrollView, Pressable } from "react-native";
+import { View, Text, Button, ScrollView, Pressable, Image } from "react-native";
 import React ,{ useContext } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import EventCard from "../components/EventCard";

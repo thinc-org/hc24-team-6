@@ -1,7 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
+import { jwtDecode } from "jwt-decode";
 import AuthContext from "../provider/AuthProvider";
+import { decode as atob } from 'base-64';
 import {
   View,
   Text,
@@ -24,8 +26,8 @@ export default function SignIn() {
   };
   const { setToken } = useContext(AuthContext);
 
-  const handleSignIn = async() => {
-    try{
+  const handleSignIn = async () => {
+    try {
       const response = await fetch('https://cunext-event-backend.onrender.com/login', {
         method: 'POST',
         headers: {
@@ -36,12 +38,26 @@ export default function SignIn() {
           password: password
         })
       });
-      if(response.status == 200){
-        navigation.navigate("Home");
+      if (response.status === 200) {
+        const data = await response.json();
+        const token = data.token;
+        setToken(token);
+        console.log(token);
+  
+        // Decode the token
+        const parts = token.split('.');
+      const decodedPayload = JSON.parse(atob(parts[1]));
+
+  
+        // Extract the role data from the decoded token
+        const role = decodedPayload.role;
+        console.log('User Role:', role);
+        if (role === 'admin') {
+          navigation.navigate("AdminHome");
+        } else {
+          navigation.navigate("Home");
+        }
       }
-      const token = await response.json();
-      setToken(token);
-      console.log(token);
     } catch (error) {
       console.log(error);
     }

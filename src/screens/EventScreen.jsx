@@ -8,6 +8,7 @@ import BottomButton from "../components/BottomButton";
 export default function EventScreen(props) {
   let event = props.route.params;
   if(event.data) event = event.data;
+  
   return (
     <SafeAreaView className=" w-screen h-screen bg-background">
       <ScrollView>
@@ -23,7 +24,7 @@ export default function EventScreen(props) {
           <Image
             className="w-full h-full rounded-3xl"
             resizeMethod="resize"
-            source={require("../../assets/event.jpeg")}
+            source={{ uri: event.image_url }}
           />
         </View>
         <View className="bg-white p-3 w-full rounded-xl shadow-md flex flex-row">

@@ -8,7 +8,7 @@ import { MagnifyingGlassIcon } from "react-native-heroicons/mini";
 import { schedulePushNotification } from "../hooks/schedulePushNotification";
 import { MapPinIcon } from "react-native-heroicons/outline";
 import AuthContext from "../provider/AuthProvider";
-
+import { mockEventData } from "../../assets/mockdata/data";
 export default function HomeScreen() {
   const { Token } = useContext(AuthContext);
   console.log(Token);
@@ -16,44 +16,11 @@ export default function HomeScreen() {
   const navigateToEvent = () => {
     navigation.navigate("AllEvent");
   }
-  const eventData = [
-    {
-      id: 1,
-      date: "15 Feb 2020",
-      name: "Chula Engineering Fair",
-      location: "ตึก 100 ปี วิศวะ",
-      size: 100,
-      price: 0,
-      image_url: require("../../assets/event.jpeg"),
-      description: "งานเปิดภาควิชาวิศวกรรมศาสตร์ ประจำปี 2563",
-      latitude : 13.736717,
-      longitude : 100.523186
-    },
-    {
-      id: 2,
-      date: "20 Mar 2020",
-      name: "Science Exhibition",
-      location: "ห้องประชุมสุรศักดิ์",
-      size: 200,
-      price: 100,
-      image_url: require("../../assets/event.jpeg"),
-      description: "งานแสดงผลงานวิจัยและนวัตกรรมภาควิทยาศาสตร์",
-      latitude : 13.736717,
-      longitude : 100.523186
-    },
-    {
-      id: 3,
-      date: "10 Apr 2020",
-      name: "Art Festival",
-      location: "สนามกีฬา",
-      size: 0,
-      price: 5,
-      image_url: require("../../assets/event.jpeg"),
-      description: "งานเทศกาลศิลปะ ประจำปี 2563",
-      latitude : 13.736717,
-      longitude : 100.523186
-    },
-  ];
+
+  const navigateToInterest = () => {
+    navigation.navigate("Interest");
+  }
+  const eventData = mockEventData;
 
   return (
     <View className="flex flex-col w-screen h-screen bg-background">
@@ -74,8 +41,8 @@ export default function HomeScreen() {
                 Chula.
               </Text>
             </View>
-            <View className="mt-16 absolute top-0 right-0 mr-4 p-3 bg-white rounded-full shadow">
-              <Icon name="notifications-outline" size={24} color="black" />
+            <View className="mt-16 absolute top-0 right-0 mr-4 p-3 bg-white rounded-full shadow" onPress={navigateToInterest}>
+              <Icon name="notifications-outline" size={24} color="black" onPress={navigateToInterest}/>
             </View>
           </View>
           <Pressable onPress={() => navigateToEvent()}>
@@ -111,12 +78,12 @@ export default function HomeScreen() {
           <Text className="font-bold text-xl mx-4 mt-6 mb-6">New Event</Text>
         </View>
         <View className="mx-4 mb-8 space-y-8">
-          {eventData.map((event) => (
+          {eventData.slice(0, 4).map((event) => (
             <Pressable
               onPress={() => navigation.navigate('Event', { ...event })}
             >
               <View className="w-[370px] h-[90px] bg-white flex items-center rounded-2xl flex-row" >
-                <Image source={require('../../assets/event.jpeg')}
+                <Image source={{ uri: event.image_url }}
                   style={{ width: 70, height: 100, borderRadius: 10, marginLeft: 16, marginBottom: 36, }}
                 />
                 <View className="flex-col justify-center gap-1 mx-5">

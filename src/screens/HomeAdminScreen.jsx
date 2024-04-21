@@ -4,27 +4,12 @@ import React, { useEffect, useState } from "react";
 import EventCard from "../components/EventCard";
 import { LinearGradient } from "expo-linear-gradient";
 import { getMyEvents, getMyEventCount, getMyEventJoinPeople } from "../api/admin.api";
-
+import { mockEventData } from "../../assets/mockdata/data";
 export default function HomeAdminScreen({ navigation }) {
-  const [eventData, setEventData] = useState([]);
   const [eventCount, setEventCount] = useState(0);
   const [joinedPeople, setJoinedPeople] = useState(0);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-
-    const events = await getMyEvents(token);
-    setEventData(events);
-
-    const countData = await getMyEventCount(token);
-    setEventCount(countData.count);
-
-    const joinedPeopleData = await getMyEventJoinPeople(token);
-    setJoinedPeople(joinedPeopleData.total);
-  };
+  const eventData = mockEventData;
+  
 
   return (
     <View className="flex flex-col w-screen h-screen bg-background">
@@ -64,7 +49,7 @@ export default function HomeAdminScreen({ navigation }) {
             <View className="bg-white shadow w-36 h-24 rounded-xl p-4">
               <View className="flex flex-row">
                 <Image source={require("../../assets/boost.png")} />
-                <Text className="ml-4 text-3xl font-bold">{eventCount}</Text>
+                <Text className="ml-4 text-3xl font-bold">94</Text>
               </View>
               <Text className="mt-3 text-gray-500 text-center">
                 Event Created
@@ -73,7 +58,7 @@ export default function HomeAdminScreen({ navigation }) {
             <View className="bg-white shadow w-52 h-24 rounded-xl p-4">
               <View className="flex flex-row">
                 <Image source={require("../../assets/people.png")} />
-                <Text className="ml-4 text-3xl font-bold">{joinedPeople}</Text>
+                <Text className="ml-4 text-3xl font-bold">1269</Text>
               </View>
               <Text className="mt-3 text-gray-500 text-center">
                 People Joined Your Event
@@ -84,9 +69,6 @@ export default function HomeAdminScreen({ navigation }) {
 
         <View className="flex flex-row justify-between">
           <Text className="font-bold text-xl mx-4 mt-6">Your Event</Text>
-          <Text className="text-lg items-center mx-4 mt-6 text-red">
-            See All
-          </Text>
         </View>
         <ScrollView
           className="flex flex-row ml-4 mt-6"
@@ -96,10 +78,7 @@ export default function HomeAdminScreen({ navigation }) {
           {eventData.map((event) => (
             <EventCard
               key={event.id}
-              date={event.date}
-              name={event.name}
-              location={event.location}
-              image_url={event.image_url}
+              props={event}
             />
           ))}
         </ScrollView>

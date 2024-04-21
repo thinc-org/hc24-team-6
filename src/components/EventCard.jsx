@@ -10,7 +10,7 @@ const EventCard = (event) => {
     <Pressable onPress={() => navigation.navigate('Event', {data})}>
       <View className="h-72 w-64 bg-white rounded-2xl mr-3 justify-between">
         <View className="w-full">
-          <Image className="w-full h-36 rounded-2xl" source={data.image_url} />
+          <Image className="w-full h-36 rounded-2xl" source={{ uri: data.image_url }} />
           <View className="m-3 flex flex-col justify-between">
             <View>
               <Text className="font-bold text-red">{data.date}</Text>

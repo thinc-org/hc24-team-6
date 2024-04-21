@@ -6,16 +6,16 @@ import { useNavigation } from "@react-navigation/native";
 const InterestScreen = () => {
   const navigation = useNavigation();
   const mockData = [
-    { iconName: "heart-outline", text: "Interest 1" },
-    { iconName: "star-outline", text: "Interest 2" },
-    { iconName: "bookmark-outline", text: "Interest 3" },
-    { iconName: "heart-outline", text: "Interest 1" },
-    { iconName: "star-outline", text: "Interest 2" },
-    { iconName: "bookmark-outline", text: "Interest 3" },
-    { iconName: "heart-outline", text: "Interest 1" },
-    { iconName: "star-outline", text: "Interest 2" },
-    { iconName: "bookmark-outline", text: "Interest 3" },
-    { iconName: "heart-outline", text: "Interest 1" },
+    { iconName: "heart-outline", text: "Volunteer" },
+    { iconName: "trophy-outline", text: "Competition" },
+    { iconName: "book-outline", text: "Academic" },
+    { iconName: "people-circle-outline", text: "MeetUp" },
+    { iconName: "cash-outline", text: "Money" },
+    { iconName: "football-outline", text: "Sport" },
+    { iconName: "chatbox-ellipses-outline", text: "Interview" },
+    { iconName: "briefcase-outline", text: "Job Fair" },
+    { iconName: "bulb-outline", text: "Philosophy" },
+    { iconName: "fast-food-outline", text: "Food" },
   ];
 
   return (

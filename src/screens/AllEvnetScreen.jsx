@@ -187,7 +187,7 @@ export default function AllEventScreen() {
                                 key={index}
                             >
                             <View className="w-[370px] h-[90px] bg-white flex items-center rounded-2xl flex-row" >
-                                <Image source={require('../../assets/event.jpeg')}
+                                <Image source={{ uri: event.image_url }}
                                 style={{width: 70, height: 100, borderRadius: 10, marginLeft: 16, marginBottom: 36,}}
                                 />
                                 <View className="flex-col justify-center gap-1 mx-5">
